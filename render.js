@@ -4,16 +4,24 @@ export function renderMaze(initMaze) {
         const ctx = canvas.getContext('2d');
         for (let y = 0; y < initMaze.length; y++) {
             for (let x = 0; x < initMaze[0].length; x++) {
+                // walls
                 if (initMaze[y][x] === 1) {
-                    wall(ctx, x, y);
+                    block(ctx, x, y);
+                }
+                // start
+                if (initMaze[y][x] === 2) {
+                    block(ctx, x, y, 'lightgreen');
+                }
+                // finish
+                if (initMaze[y][x] === 3) {
+                    block(ctx, x, y, 'lightpink');
                 }
             }
         }
     }
 }
-export function wall(ctx, x, y) {
-    console.log(x, y);
+function block(ctx, x, y, color = 'gray') {
     ctx.beginPath();
-    ctx.fillStyle = 'gray';
+    ctx.fillStyle = color;
     ctx.fillRect(x * 50, y * 50, 50, 50);
 }
