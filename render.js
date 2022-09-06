@@ -25,3 +25,8 @@ function block(ctx, x, y, color = 'gray') {
     ctx.fillStyle = color;
     ctx.fillRect(x * 50, y * 50, 50, 50);
 }
+export function iam(ctx, x, y, color = 'rgba(200,100,30,0.3)') {
+    ctx.beginPath();
+    ctx.fillStyle = color;
+    ctx.fillRect(x * 50, y * 50, 50, 50);
+}
