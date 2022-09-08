@@ -2,14 +2,25 @@ import { iam } from './render.js';
 const canvas = document.querySelector('.maze');
 const ctx = canvas === null || canvas === void 0 ? void 0 : canvas.getContext('2d');
 export function promisifyMaze(maze) {
+    const getStartPoint = () => {
+        let start = { startX: 0, startY: 0 };
+        maze.forEach((y, index) => {
+            if (y.includes(2)) {
+                start.startX = y.indexOf(2);
+                start.startY = index;
+            }
+        });
+        return start;
+    };
+    const { startX, startY } = getStartPoint();
     const state = {
-        x: 1,
-        y: 0,
+        x: startX,
+        y: startY,
         getPosition: function () { return { x: this.x, y: this.y }; },
         left: function () {
             if (maze[this.y][this.x - 1] !== undefined && maze[this.y][this.x - 1] !== 1) {
                 console.log(`Going to ${this.x - 1}-${this.y}`);
-                iam(ctx, this.x, this.y);
+                iam(ctx, this.x - 1, this.y);
                 return Promise.resolve(Object.assign(Object.assign({}, this), { x: this.x - 1 }));
             }
             else
@@ -19,7 +30,7 @@ export function promisifyMaze(maze) {
         right: function () {
             if (maze[this.y][this.x + 1] !== undefined && maze[this.y][this.x + 1] !== 1) {
                 console.log(`Going to ${this.x + 1}-${this.y}`);
-                iam(ctx, this.x, this.y);
+                iam(ctx, this.x + 1, this.y);
                 return Promise.resolve(Object.assign(Object.assign({}, this), { x: this.x + 1 }));
             }
             else
@@ -28,8 +39,8 @@ export function promisifyMaze(maze) {
         },
         top: function () {
             if (this.y > 0 && maze[this.y - 1][this.x] !== 1) {
-                console.log(`Going to ${this.x}-${this.y + 1}`);
-                iam(ctx, this.x, this.y);
+                console.log(`Going to ${this.x}-${this.y - 1}`);
+                iam(ctx, this.x, this.y - 1);
                 return Promise.resolve(Object.assign(Object.assign({}, this), { y: this.y - 1 }));
             }
             else
@@ -38,8 +49,8 @@ export function promisifyMaze(maze) {
         },
         bottom: function () {
             if (this.y < maze.length - 1 && maze[this.y + 1][this.x] !== 1) {
-                console.log(`Going to ${this.x}-${this.y - 1}`);
-                iam(ctx, this.x, this.y);
+                console.log(`Going to ${this.x}-${this.y + 1}`);
+                iam(ctx, this.x, this.y + 1);
                 return Promise.resolve(Object.assign(Object.assign({}, this), { y: this.y + 1 }));
             }
             else

@@ -1,4 +1,5 @@
 export function renderMaze(initMaze) {
+    console.log('render',initMaze.length, initMaze[0].length);
     const canvas = document.querySelector('.maze');
     if ((canvas === null || canvas === void 0 ? void 0 : canvas.getContext('2d')) != null) {
         const ctx = canvas.getContext('2d');
@@ -23,10 +24,10 @@ export function renderMaze(initMaze) {
 function block(ctx, x, y, color = 'gray') {
     ctx.beginPath();
     ctx.fillStyle = color;
-    ctx.fillRect(x * 50, y * 50, 50, 50);
+    ctx.fillRect(x * 30, y * 30, 30, 30);
 }
 export function iam(ctx, x, y, color = 'rgba(200,100,30,0.3)') {
     ctx.beginPath();
     ctx.fillStyle = color;
-    ctx.fillRect(x * 50, y * 50, 50, 50);
+    ctx.fillRect(x * 30, y * 30, 30, 30);
 }

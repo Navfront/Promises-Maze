@@ -25,11 +25,11 @@ if (canvas?.getContext('2d') != null) {
 function block(ctx: CanvasRenderingContext2D, x: number, y: number, color: string= 'gray'): void {
   ctx.beginPath()
   ctx.fillStyle = color
-  ctx.fillRect(x*50, y*50, 50, 50)
+  ctx.fillRect(x*20, y*20, 20, 20)
 }
 
 export function iam(ctx: CanvasRenderingContext2D, x: number, y: number, color: string = 'rgba(200,100,30,0.3)'): void {
   ctx.beginPath()
   ctx.fillStyle = color
-  ctx.fillRect(x*50, y*50, 50, 50)
+  ctx.fillRect(x*20, y*20, 20, 20)
 }
